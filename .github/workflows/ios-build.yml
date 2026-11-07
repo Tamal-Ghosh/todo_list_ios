@@ -23,4 +23,4 @@ jobs:
         run: xcodegen generate
       - name: Build iOS Simulator (unsigned)
         run: |
-          xcodebuild -project TaskManager.xcodeproj -scheme TaskManager -configuration Debug -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' -derivedDataPath build CODE_SIGNING_ALLOWED=NO build
+          xcodebuild -project ToDoList.xcodeproj -scheme ToDoList -configuration Debug -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' -derivedDataPath build CODE_SIGNING_ALLOWED=NO build

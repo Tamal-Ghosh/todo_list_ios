@@ -5,5 +5,5 @@ build/
 DerivedData/
 *.xcuserstate
 *.xcuserdata/
-TaskManager.xcodeproj/
+ToDoList.xcodeproj/
 .DS_Store

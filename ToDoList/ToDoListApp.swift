@@ -2,7 +2,7 @@ import SwiftUI
 import FirebaseCore
 
 @main
-struct TaskManagerApp: App {
+struct ToDoListApp: App {
     @StateObject private var auth: AuthStore
 
     init() {

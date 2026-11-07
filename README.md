@@ -24,10 +24,10 @@ Run in the project directory, after saving your downloaded plist in `FirebaseCon
 
 Copy output to GitHub repository > Settings > Secrets and variables > Actions > New repository secret. Name: `FIREBASE_PLIST_BASE64`. Paste the base64 output as the value.
 
-Push project to a **public GitHub repository**. Workflow `.github/workflows/ios-build.yml` generates `TaskManager.xcodeproj` on a macOS runner, downloads Firebase Swift packages, and builds for generic iOS Simulator without signing.
+Push project to a **public GitHub repository**. Workflow `.github/workflows/ios-build.yml` generates `ToDoList.xcodeproj` on a macOS runner, downloads Firebase Swift packages, and builds for generic iOS Simulator without signing.
 
 ## Local Xcode (if available later)
-Install XcodeGen (`brew install xcodegen`), put plist in FirebaseConfig, run `xcodegen generate`, then open `TaskManager.xcodeproj`. For deployment to a physical iPhone, configure signing separately.
+Install XcodeGen (`brew install xcodegen`), put plist in FirebaseConfig, run `xcodegen generate`, then open `ToDoList.xcodeproj`. For deployment to a physical iPhone, configure signing separately.
 
 ## Firestore structure
 `users/{uid}/tasks/{taskId}` with fields `title`, `description`, `completed`, `createdAt`.
@@ -37,3 +37,6 @@ Install XcodeGen (`brew install xcodegen`), put plist in FirebaseConfig, run `xc
 - Cloud build is **not** a substitute for interactive iPhone testing.
 - This is a starter project; build success has not been verified in this environment. Check GitHub Actions logs and fix compatibility issues if any.
 - Firebase config file identifies the project and is not a server-side admin secret; nevertheless this template keeps it out of Git for tidy repository configuration. Never upload service-account keys.
+
+## App icon build fix
+`ToDoList/Assets.xcassets/AppIcon.appiconset/` includes a 1024x1024 PNG and valid Contents.json. XcodeGen explicitly selects AppIcon. This addresses the missing AppIcon asset catalog error observed in the earlier TaskManager build. The corrected ToDoList build must still be verified on GitHub Actions.
