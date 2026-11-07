@@ -1,0 +1,9 @@
+# Private Firebase app configuration
+FirebaseConfig/GoogleService-Info.plist
+# Xcode build and generated project
+build/
+DerivedData/
+*.xcuserstate
+*.xcuserdata/
+TaskManager.xcodeproj/
+.DS_Store

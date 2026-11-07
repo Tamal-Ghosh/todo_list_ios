@@ -1,0 +1,26 @@
+name: iOS Simulator Build
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install XcodeGen
+        run: brew install xcodegen
+      - name: Restore Firebase config
+        env:
+          FIREBASE_PLIST_BASE64: ${{ secrets.FIREBASE_PLIST_BASE64 }}
+        run: |
+          if [ -z "$FIREBASE_PLIST_BASE64" ]; then
+            echo "Missing FIREBASE_PLIST_BASE64 repository secret"
+            exit 1
+          fi
+          printf '%s' "$FIREBASE_PLIST_BASE64" | base64 --decode > FirebaseConfig/GoogleService-Info.plist
+      - name: Generate Xcode project
+        run: xcodegen generate
+      - name: Build iOS Simulator (unsigned)
+        run: |
+          xcodebuild -project TaskManager.xcodeproj -scheme TaskManager -configuration Debug -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' -derivedDataPath build CODE_SIGNING_ALLOWED=NO build
